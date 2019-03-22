@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DepartmentChair>
+@{
+    ViewData["Title"] = "GetAllDepartmentChairs";
+}
+
+<h2>GetAllDepartmentChairs</h2>
+
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+
+
+        <tr>
+            <td>Department ID </td>
+            <td>Department Chair Name</td>
+            <td>Department Name</td>
+            <td>Email</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (DepartmentChair eachDepartmentChair in Model)
+        {
+            var fullname = eachDepartmentChair.Firstname + " " + eachDepartmentChair.Lastname;
+            <tr>
+                <td>@eachDepartmentChair.DepartmentID</td>
+                <td>@fullname</td>
+                <td>@eachDepartmentChair.Department.DepartmentName</td>
+                <td>@eachDepartmentChair.Email</td>
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>

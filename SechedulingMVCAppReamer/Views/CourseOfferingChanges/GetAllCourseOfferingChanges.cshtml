@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CourseOfferingChanges>
+
+@{
+    ViewData["Title"] = "ListAllChanges";
+}
+
+<h4>ListAllChanges</h4>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>Changer's Name </th>
+            <th>Changer's Role</th>
+            <th>Change Type</th>
+            <th>Date and Time Changed</th>
+            <th>CRN</th>
+            <th>Course Number</th>
+            <th>Department Name</th>
+            <th>Instructor Name</th>
+            <th>Days</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Course Start Date</th>
+            <th>Course End Date</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (CourseOfferingChanges eachCourseOfferingChanges in Model)
+        {
+        <tr>
+            <td>@eachCourseOfferingChanges.ChangersName</td>
+            <td>@eachCourseOfferingChanges.ChangersRole</td>
+            <td>@eachCourseOfferingChanges.ChangeType</td>
+            <td>@eachCourseOfferingChanges.CRN</td>
+            <td>@eachCourseOfferingChanges.Course.CourseNumber</td>
+            <td>@eachCourseOfferingChanges.Course.CourseName</td>
+            <td>@eachCourseOfferingChanges.Course.Department.DepartmentName</td>
+            @if (eachCourseOfferingChanges.InstructorID == null)
+            {
+                <td>No instructor</td>
+
+            }
+            else
+            {
+                <td>@eachCourseOfferingChanges.Instructor.InstructorLastName</td>
+            }
+            <td>@eachCourseOfferingChanges.Days</td>
+            <td>@eachCourseOfferingChanges.StartTime</td>
+            <td>@eachCourseOfferingChanges.EndTime</td>
+            <td>@eachCourseOfferingChanges.StartDate</td>
+            <td>@eachCourseOfferingChanges.EndDate</td>
+            <td></td>
+
+        </tr>
+        }
+    </tbody>
+
+</table>
+

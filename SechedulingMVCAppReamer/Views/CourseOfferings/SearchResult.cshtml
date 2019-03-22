@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CourseOffering>
+@{
+    ViewData["Title"] = "SearchResult";
+}
+<h2>SearchResult</h2>
+
+@if (Model.Count() == 0)
+{
+    <h4>No matches for your search. Sorry!</h4>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>CRN</td>
+                <td>Course Name</td>
+                <td>Department Name</td>
+                <td>Instructor First Name</td>
+                <td>Last Name</td>
+                <td>Days</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+                <td>Course Start Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CourseOffering eachCourseOffering in Model)
+            {
+                //getting error
+                <tr>
+                    <td>@eachCourseOffering.CRN</td>
+                    <td>@eachCourseOffering.Course.CourseName</td>
+                    <td>@eachCourseOffering.Course.Department.DepartmentName</td>
+
+                    @if (eachCourseOffering.InstructorID == null)
+
+                    {
+                        <td>No Instructor available</td>
+
+                    }
+                    else
+                    {
+
+                        <td>@eachCourseOffering.Instructor.InstructorLastName</td>
+                    }
+
+                    <td>@eachCourseOffering.Days</td>
+                    <td>@eachCourseOffering.StartTime.ToShortTimeString()</td>
+                    <td>@eachCourseOffering.EndTime.ToShortTimeString()</td>
+                    <td>@eachCourseOffering.StartDate.ToShortDateString()</td>
+
+                    <td>
+
+
+                        <a class="btn btn-primary" asp-controller="CourseOfferings" asp-action="DeleteCourseOffering"
+                           asp-route-id="@eachCourseOffering.CourseOfferingID">
+                            Delete @eachCourseOffering.Course.CourseID
+                        </a>
+                        <a class="btn btn-primary" asp-controller="CourseOfferings" asp-action="EditCourseOffering"
+                           asp-route-id="@eachCourseOffering.CourseOfferingID">
+                            Edit @eachCourseOffering.Course.CourseID
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+}
+<a class="btn btn primary" asp-controller="CourseOfferings" asp-action="AddCourseOffering">Add New Course Offering</a>
+

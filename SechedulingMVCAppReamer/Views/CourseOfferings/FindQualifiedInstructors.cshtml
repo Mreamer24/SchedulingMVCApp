@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Instructor>
+
+@{
+    ViewData["Title"] = "FindQualifiedInstructors";
+}
+
+<h4>List qualified Instructors</h4>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>InstructorID</td>
+            <td>InstructorFirstName</td>
+            <td>InstructorLastName</td>
+            <td>DepartmentName</td>
+
+
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (Instructor eachInstructor in Model)
+        {
+            <tr>
+                <td>@eachInstructor.InstructorID</td>
+                <td>@eachInstructor.InstructorFirstName</td>
+                <td>@eachInstructor.InstructorLastName</td>
+                <td>@eachInstructor.Department.DepartmentName</td>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    <td>
+                        <a class="btn btn-primary" asp-controller="CourseOfferings"
+                           asp-action="AssignInstructorToCourseOffering"
+                           asp-route-id="@eachInstructor.InstructorID">
+                            Assign @eachInstructor.InstructorLastName
+                        </a>
+                    </td>
+
+                }
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+

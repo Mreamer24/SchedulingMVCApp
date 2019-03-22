@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Department>
+@{
+    ViewData["Title"] = "GetAllDepartments";
+}
+
+<h2>GetAllDepartments</h2>
+
+<table class="table">
+
+    <thead>
+
+
+        <tr>
+            <td>Department ID </td>
+            <td>Department Name</td>
+            <td>Department Chair Name</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Department eachDepartment in Model)
+        {
+            var fullname = "None";
+            if (eachDepartment.DepartmentChairID == null)
+            {
+                fullname = "No Chair";
+            }
+            else
+            {
+                fullname = eachDepartment.DepartmentChair.Firstname + " " + eachDepartment.DepartmentChair.Lastname;
+            }
+            <tr>
+                <td>@eachDepartment.DepartmentID</td>
+                <td>@eachDepartment.DepartmentName</td>
+                <td>@fullname</td>
+
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>
